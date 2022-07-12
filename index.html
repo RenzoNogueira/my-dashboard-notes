@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="frameworks/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="frameworks/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Notes</title>
+</head>
+
+<body>
+
+    <div>
+        <!-- Navbar mobile -->
+        <nav class="navbar border-0 navbar-default navbar-fixed-top navbar-inverse navbar-fixed-top-mobile">
+            <div class="container-fluid">
+                <div class="navbar-header" data-bs-toggle="tooltip" data-bs-placement="right" title="Menu de itens">
+                    <button type="button" class="navbar-toggle btn btn-outline-primary border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="#">Menu</a>
+                </div>
+            </div>
+        </nav>
+        <!-- Menu lateral -->
+        <div id="menu-lateral" class="col-md-2 navbar-collapse collapse shadow">
+            <div class="panel panel-default px-2">
+                <div class="panel-heading d-flex justify-content-between align-items-center">
+                    <h3 class="panel-title">Menu</h3>
+                    <button type="button" class="navbar-toggle btn btn-outline-primary border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-times fs-5"></i> <!-- Fechar menu lateral -->
+                    </button>
+                </div>
+                <div class="panel-body d-flex flex-column justify-content-center align-items-center">
+                    <ul class="nav nav-pills nav-stacked d-flex flex-column justify-content-center align-items-center">
+                        <li><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative" href="index.php">Home<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle"></i></a></li>
+                        <li><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative" href="notes.php">Notes<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle"></i></a></li>
+                        <li><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative" href="about.php">About<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle"></i></a></li>
+                    </ul>
+                    <div class="mt-3">
+                        <a href="add-note.php" class="btn btn-sm btn-primary btn-block">
+                            <i class="fa fa-plus"></i> Adicionar item
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/274af9ab8f.js" crossorigin="anonymous"></script>
+    <script src="frameworks/jquery/jquery-3.6.0.min.js"></script>
+    <script src="frameworks/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="frameworks/fontawesome/js/all.min.js"></script>
+    <script src="frameworks/vue_js/vue.global.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+        $(".navbar-header").on("click", () => $(".tooltip").remove())
+    </script>
+</body>
+
+</html>
