@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="frameworks/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="frameworks/fontawesome/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="frameworks/fontawesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="frameworks/jquery-ui-1.13.1.custom/jquery-ui.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Notes</title>
 </head>
 
 <body>
 
-    <div>
+    <div id="app" class="position-relative">
         <!-- Navbar mobile -->
         <nav class="navbar border-0 navbar-default navbar-fixed-top navbar-inverse navbar-fixed-top-mobile">
             <div class="container-fluid">
@@ -53,13 +54,40 @@
         <main>
 
         </main>
+        <!-- Aba flutuante de ferramentas -->
+        <!-- As ferreamentas são adicionar nova nota, selecionar todos, e pesquisar -->
+        <!-- Os botões serão outlines redondos com icones -->
+        <div id="aba-flutuante" class="position-fixed bottom-0">
+            <div  class="p-3 shadow-sm">
+                <div class="container-fluid">
+                    <div class="d-flex">
+                        <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar nova nota">
+                            <a href="add-note.php" class="btn btn-outline-primary btn-block rounded-1">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                        <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecionar todos">
+                            <a href="notes.php" class="btn btn-outline-primary btn-block rounded-1">
+                                <i class="fa fa-check-square-o"></i>
+                            </a>
+                        </div>
+                        <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar">
+                            <a href="notes.php" class="btn btn-outline-primary btn-block rounded-1">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://kit.fontawesome.com/274af9ab8f.js" crossorigin="anonymous"></script>
     <script src="frameworks/jquery/jquery-3.6.0.min.js"></script>
+    <script src="frameworks/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
     <script src="frameworks/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="frameworks/fontawesome/js/all.min.js"></script>
+    <!-- <script src="frameworks/fontawesome/js/all.min.js"></script> -->
     <script src="frameworks/vue_js/vue.global.js"></script>
     <script src="js/script.js"></script>
     <script>
@@ -68,8 +96,27 @@
             tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
+            $(".navbar-header").on("click", () => $(".tooltip").remove())
+            // Ativa o arrastar e soltar para mover o menu lateral no eixo y e x
+            $("#aba-flutuante").draggable({
+                // SE sair fora da tela, não faz nada
+                // containment: "window",
+                // Não permite que o elemento seja arrastado para fora da tela
+                scroll: false,
+                drag: function(event, ui) {
+                    if (ui.position.top < 0) {
+                        ui.position.top = 0
+                    }
+                    if (ui.position.left < 0) {
+                        ui.position.left = 0
+                    }
+                    // Impede que o elemento ultrapasse a base da janela
+                    // if (ui.position.top > $("#app").height() - $("#aba-flutuante").height()) {
+                    //     ui.position.top = $("#app").height() -( $("#aba-flutuante").height()*2)
+                    // }
+                }
+            });
         });
-        $(".navbar-header").on("click", () => $(".tooltip").remove())
     </script>
 </body>
 
