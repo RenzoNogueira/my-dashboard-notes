@@ -1,4 +1,5 @@
 /* Menu lateral */
+
 #menu-lateral {
     width: 200px;
     height: 100%;
@@ -9,4 +10,14 @@
     z-index: 1;
     overflow-x: hidden;
     padding-top: 20px;
+}
+
+.ui-state-highlight {
+    height: 2.5em;
+    line-height: 1.2em;
+    width: 100% !important;
+    background-color: var(--bs-gray);
+    border: none;
+    opacity: 0.5;
+    filter: blur(3px);
 }
