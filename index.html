@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="frameworks/bootstrap/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="frameworks/fontawesome/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="frameworks/jquery-ui-1.13.1.custom/jquery-ui.min.css">
+    <link rel="stylesheet" href="frameworks/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Notes</title>
 </head>
@@ -19,7 +19,7 @@
         <nav class="navbar border-0 navbar-default navbar-fixed-top navbar-inverse navbar-fixed-top-mobile">
             <div class="container-fluid">
                 <div class="navbar-header" data-bs-toggle="tooltip" data-bs-placement="right" title="Menu de itens">
-                    <button type="button" class="navbar-toggle btn btn-outline-primary border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
+                    <button type="button" class="navbar-toggle btn btn-light me-3 border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-bars"></i>
                     </button>
@@ -38,11 +38,16 @@
                     </button>
                 </div>
                 <div class="panel-body d-flex flex-column justify-content-center align-items-center">
-                    <ul id="sortable" class="nav nav-pills nav-stacked d-flex flex-column justify-content-center align-items-center ">
+                    <!-- <ul id="sortable" class="nav nav-pills nav-stacked d-flex flex-column justify-content-center align-items-center">
                         <li id="group_1"><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative w-100" href="index.php ">Home<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle "></i></a></li>
                         <li id="group_2"><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative w-100" href="notes.php ">Notes<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle "></i></a></li>
                         <li id="group_3"><a class="btn btn-outline-secondary border-1 px-5 my-2 fs-5 position-relative w-100" href="about.php ">About<i class="fa-solid fa-grip-lines fs-6 position-absolute px-1 top-50 end-0 translate-middle "></i></a></li>
-                    </ul>
+                        <group-notes title="Home" group-id="group_1" group_link="notes.php"></group-notes>
+                        <group-notes title="Notes" group-id="group_2" group_link="notes.php"></group-notes>
+                        <group-notes title="About" group-id="group_3" group_link="about.php"></group-notes>
+                        <group-notes title="Contact" group-id="group_4" group_link="contact.php"></group-notes>
+                    </ul> -->
+                    <group-notes :array-obj="groupNotes"></group-notes>
                     <div class="mt-3 ">
                         <a href="add-note.php " class="btn btn-sm btn-primary btn-block ">
                             <i class="fa fa-plus "></i> Adicionar item
@@ -55,24 +60,22 @@
 
         </main>
         <!-- Aba flutuante de ferramentas -->
-        <!-- As ferreamentas são adicionar nova nota, selecionar todos, e pesquisar -->
-        <!-- Os botões serão outlines redondos com icones -->
         <div id="aba-flutuante" class="position-fixed bottom-0 ">
             <div class="p-3 shadow-sm ">
                 <div class="container-fluid ">
                     <div class="d-flex ">
                         <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Adicionar nova nota">
-                            <a href="add-note.php " class="btn btn-outline-primary btn-block rounded-1">
+                            <a href="add-note.php " class="btn btn-light btn-block rounded-1">
                                 <i class="fa fa-plus "></i>
                             </a>
                         </div>
                         <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecionar todos">
-                            <a href="notes.php " class="btn btn-outline-primary btn-block rounded-1">
+                            <a href="notes.php " class="btn btn-light btn-block rounded-1">
                                 <i class="fa fa-check-square-o "></i>
                             </a>
                         </div>
                         <div class="mx-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Pesquisar">
-                            <a href="notes.php" class="btn btn-outline-primary btn-block rounded-1">
+                            <a href="notes.php" class="btn btn-light btn-block rounded-1">
                                 <i class="fa fa-search "></i>
                             </a>
                         </div>
@@ -83,39 +86,14 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://kit.fontawesome.com/274af9ab8f.js " crossorigin="anonymous "></script>
-    <script src="frameworks/jquery/jquery-3.6.0.min.js "></script>
-    <script src="frameworks/jquery-ui-1.13.1.custom/jquery-ui.min.js "></script>
-    <script src="frameworks/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- <script src="frameworks/fontawesome/js/all.min.js "></script> -->
-    <script src="frameworks/vue_js/vue.global.js "></script>
-    <script src="js/script.js "></script>
-    <script>
-        $(document).ready(function() {
-            var tooltipTriggerList = [].slice.call($('[data-bs-toggle="tooltip"]'))
-            tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-            $(".navbar-header ").on("click ", () => $(".tooltip ").remove())
-            $("#aba-flutuante ").draggable({ // Ativa o arrastar e soltar para mover o menu lateral no eixo y e x
-                scroll: false,
-                drag: (event, ui) => {
-                    if (ui.position.top < 0) ui.position.top = 0
-                    if (ui.position.left < 0) ui.position.left = 0
-                }
-            });
-            $("#sortable").sortable({
-                placeholder: "ui-state-highlight"
-            });
-            $("#sortable").sortable("refreshPositions");
-            $("#sortable").sortable({
-                stop: (event, ui) => sessionStorage.setItem("sortable", $("#sortable").sortable("toArray")) // Salva o array de IDs na sessão
-            });
-            $("#sortable").disableSelection();
-            if (sortable = sessionStorage.getItem("sortable")) { // Organizar os itens de acordo com a ordem salva no sessionStorage
-                const sortableArray = sortable.split(",");
-                sortableArray.forEach(id => $("#" + id).appendTo("#sortable"));
-            }
-        });
-    </script>
+    <script src="https://kit.fontawesome.com/274af9ab8f.js" crossorigin="anonymous "></script>
+    <script src="frameworks/jquery/jquery-3.6.0.min.js"></script>
+    <script src="frameworks/jquery-ui-1.13.1.custom/jquery-ui.min.js"></script>
+    <script src="frameworks/jquery-confirm-v3.3.4/dist/jquery-confirm.min.js"></script>
+    <script src="frameworks/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="frameworks/vue/vue.global.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/vue.js"></script>
 </body>
 
 </html>
