@@ -19,7 +19,7 @@
         <nav class="navbar border-0 navbar-default navbar-fixed-top navbar-inverse navbar-fixed-top-mobile">
             <div class="container-fluid">
                 <div class="navbar-header" data-bs-toggle="tooltip" data-bs-placement="right" title="Menu de itens">
-                    <button type="button" class="navbar-toggle btn btn-light me-3 border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
+                    <button @click="openLeftPanel" type="button" class="navbar-toggle btn btn-light me-3 border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-bars"></i>
                     </button>
@@ -32,7 +32,7 @@
             <div class="panel panel-default px-2">
                 <div class="panel-heading d-flex justify-content-between align-items-center">
                     <h3 class="panel-title">Menu</h3>
-                    <button type="button" class="navbar-toggle btn btn-outline-primary border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
+                    <button @click="openLeftPanel" type="button" class="navbar-toggle btn btn-outline-primary border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#menu-lateral" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-times fs-5"></i> <!-- Fechar menu lateral -->
                     </button>
@@ -56,8 +56,32 @@
                 </div>
             </div>
         </div>
-        <main>
-
+        <main class="left-panel-is-closed">
+            <div class="group-notes p-5">
+                <div class="column">
+                    <div class="portlet" data-bs-toggle="tooltip" data-bs-placement="right" title="Há 3 dias">
+                        <div class="card-title">
+                            <div class="portlet-header"><h4>Anotações 1</h4></div>
+                        </div>
+                        <div class="portlet-content">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+                        </div>
+                    </div>
+                    <div class="portlet" data-bs-toggle="tooltip" data-bs-placement="right" title="Há 3 dias">
+                        <div class="card-title">
+                            <div class="portlet-header"><h4>Anotações 2</h4></div>
+                        </div>
+                        <div class="portlet-content">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+                        </div>
+                    </div>
+                </div>
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"></div>
+               
+            </div>
         </main>
         <!-- Aba flutuante de ferramentas -->
         <div id="aba-flutuante" class="position-fixed bottom-0 ">

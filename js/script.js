@@ -17,9 +17,9 @@ $(document).ready(function() {
         stop: (event, ui) => sessionStorage.setItem("group-notes-sortable", $("#group-notes-sortable").sortable("toArray")) // Salva o array de IDs na sessão
     });
     $("#group-notes-sortable").disableSelection();
-    if (sessionStorage.getItem("group-notes-sortable") != null    ) { // Organizar os itens de acordo com a ordem salva no sessionStorage
+    if (sessionStorage.getItem("group-notes-sortable") != null) { // Organizar os itens de acordo com a ordem salva no sessionStorage
         const GROUP_NOTES_SORTABLEARRAY = sessionStorage.getItem("group-notes-sortable").split(",")
-        console.log(GROUP_NOTES_SORTABLEARRAY)
+        // console.log(GROUP_NOTES_SORTABLEARRAY)
         GROUP_NOTES_SORTABLEARRAY.forEach(id => $("#" + id).appendTo("#group-notes-sortable"));
     }
     // $.alert({
@@ -33,4 +33,23 @@ $(document).ready(function() {
     //         OK: () => {}
     //     }
     // });
+
+    $(".column").sortable({
+        connectWith: ".column",
+        handle: ".portlet-header",
+        cancel: ".portlet-toggle",
+        placeholder: "portlet-placeholder ui-corner-all"
+    });
+
+    $(".portlet")
+        .addClass("ui-widget card")
+        .find(".portlet-header")
+        .addClass("ui-corner-all")
+        .prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+
+    $(".portlet-toggle").on("click", function() {
+        var icon = $(this);
+        icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+        icon.closest(".portlet").find(".portlet-content").toggle();
+    });
 });
